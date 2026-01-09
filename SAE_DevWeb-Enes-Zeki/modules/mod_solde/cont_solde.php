@@ -27,5 +27,6 @@ class ControllerSolde {
                 }
                 break;
         }
+        $this->vue->afficher();
     }
 }

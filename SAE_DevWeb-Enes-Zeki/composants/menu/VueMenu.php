@@ -6,29 +6,29 @@ class VueMenu extends VueGenerique {
     public function prepareMenu($estConnecte = false, $role = null) {
         
         $this->affichage .= '
-        <nav style="background-color: #333; padding: 10px;">
-            <ul style="list-style: none; display: flex; gap: 15px; margin: 0;">
-                <li><a href="index.php" style="color: white;">Accueil</a></li>';
+        <nav class="navbar navbar-expand-lg bg-light rounded-4 px-3">
+            <a class="navbar-brand fw-bold" href="index.php">E-BUVETTE</a>
+            <div class="navbar-nav flex-wrap gap-2">';
 
         if ($estConnecte) {
-            $this->affichage .= '<li><a href="index.php?module=barman" style="color: white;">Barman (Vente)</a></li>';
-            $this->affichage .= '<li><a href="index.php?module=historique" style="color: white;">Historique</a></li>';
+            $this->affichage .= '<a class="nav-link" href="index.php?module=barman">Barman (Vente)</a>';
+            $this->affichage .= '<a class="nav-link" href="index.php?module=historique">Historique</a>';
 
             // Utilisation du paramètre $role passé par le contrôleur
             if ($role === 'admin') {
-                $this->affichage .= '<li><a href="index.php?module=inventaire" style="color: white;">Inventaire</a></li>';
-                $this->affichage .= '<li><a href="index.php?module=produit" style="color: white;">Produits</a></li>';
+                $this->affichage .= '<a class="nav-link" href="index.php?module=inventaire">Inventaire</a>';
+                $this->affichage .= '<a class="nav-link" href="index.php?module=produit">Produits</a>';
             }
 
-            $this->affichage .= '<li><a href="index.php?module=solde" style="color: white;">Solde</a></li>';
-            $this->affichage .= '<li><a href="index.php?module=profil" style="color: white;">Mon Profil</a></li>';
-            $this->affichage .= '<li><a href="index.php?module=connexion&action=deconnexion" style="color: white;">Déconnexion</a></li>';
+            $this->affichage .= '<a class="nav-link" href="index.php?module=solde">Solde</a>';
+            $this->affichage .= '<a class="nav-link" href="index.php?module=profil">Mon Profil</a>';
+            $this->affichage .= '<a class="nav-link text-danger" href="index.php?module=connexion&action=deconnexion">Déconnexion</a>';
         } else {
-            $this->affichage .= '<li><a href="index.php?module=connexion" style="color: white;">Connexion</a></li>';
+            $this->affichage .= '<a class="nav-link" href="index.php?module=connexion">Connexion</a>';
         }
 
         $this->affichage .= '
-            </ul>
+            </div>
         </nav>';
     }
 

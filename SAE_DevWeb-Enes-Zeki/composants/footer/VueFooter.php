@@ -6,7 +6,7 @@ class VueFooter
 
     public function prepareFooter()
     {
-        $this->footer = '<footer class="footer">MVC3</footer>';
+        $this->footer = '<div class="text-center text-muted small">MVC3 • E-BUVETTE</div>';
     }
 
     public function renderFooter()

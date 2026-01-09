@@ -27,5 +27,6 @@ class ContInscription {
                 break;
         }
         if (isset($_POST["csrf_token"])) TokenCSRF::initToken(true);
+        $this->vue->afficher();
     }
 }

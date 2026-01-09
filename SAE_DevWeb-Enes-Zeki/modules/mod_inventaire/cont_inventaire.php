@@ -18,5 +18,6 @@ class ContInventaire {
         $nbAlertes = $this->modele->getStatsAlerte($idAsso);
         
         $this->vue->afficherInventaire($inventaire, $nbAlertes);
+        $this->vue->afficher();
     }
 }
