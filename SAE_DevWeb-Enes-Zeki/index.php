@@ -4,20 +4,20 @@ $_SESSION['idAsso'] = 1;
 
 require_once 'Connexion.php';
 require_once 'VueGenerique.php';
+require_once 'composants/layout.php';
 require_once 'composants/menu/ControllerMenu.php';
 require_once 'composants/footer/ControllerFooter.php';
 
 Connexion::initConnexion();
+
+$scriptDir = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+$baseUrl = ($scriptDir === '' || $scriptDir === '.') ? '/public' : $scriptDir . '/public';
+define('BASE_URL', $baseUrl);
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Nom du Site</title>
-</head>
-<body>
-<header>
-    <h1>Nom du Site</h1>
+<?php
+renderLayoutHeader('E-BUVETTE');
+?>
+<header class="container py-3">
     <?php
     $contM = new ControllerMenu();
     $contM->afficherMenu();
@@ -62,17 +62,18 @@ Connexion::initConnexion();
             new ModHistorique();
             break;  
         default:
-            echo '<p>Bienvenue sur le site. Sélectionnez un module dans le menu pour commencer.</p>';
+            echo '<div class="container py-4"><div class="card-soft p-4">Bienvenue sur le site. Sélectionnez un module dans le menu pour commencer.</div></div>';
             break;
     }
     ?>
 </main>
 
-<footer>
+<footer class="container py-4">
     <?php
     $contF = new ControllerFooter();
     $contF->afficherFooter();
     ?>
 </footer>
-</body>
-</html>
+<?php
+renderLayoutFooter();
+?>

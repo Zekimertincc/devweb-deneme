@@ -3,28 +3,42 @@ include_once "VueGenerique.php";
 
 class VueHistorique extends VueGenerique {
     public function afficherHistorique($commandes) {
-        $this->affichage .= "<h2>Historique des Ventes</h2>";
-
-        if (empty($commandes)) {
-            $this->affichage .= "<p>Aucune commande enregistrée pour le moment.</p>";
-        } else {
-            $this->affichage .= "<table border='1' style='width:100%; border-collapse: collapse; text-align: left;'>
-                    <tr style='background-color: #34495e; color: white;'>
-                        <th style='padding:10px;'>Date</th>
-                        <th style='padding:10px;'>Client</th>
-                        <th style='padding:10px;'>Montant Total</th>
-                    </tr>";
-
-            foreach ($commandes as $c) {
-                $this->affichage .= "<tr>
-                        <td style='padding:10px;'>" . $c['dateCommande'] . "</td>
-                        <td style='padding:10px;'>" . htmlspecialchars($c['prenom_client'] . " " . $c['nom_client']) . "</td>
-                        <td style='padding:10px;'>" . $c['total'] . " €</td>
-                      </tr>";
-            }
-            $this->affichage .= "</table>";
+        $items = '';
+        foreach ($commandes as $commande) {
+            $label = htmlspecialchars($commande['prenom_client'] . ' ' . $commande['nom_client']);
+            $total = htmlspecialchars($commande['total']);
+            $date = htmlspecialchars($commande['dateCommande']);
+            $items .= '<li class="d-flex justify-content-between"><span>' . $label . '</span><span>' . $total . '€</span></li>';
+            $items .= '<li class="small text-muted mb-2">Commande du ' . $date . '</li>';
         }
-        $this->affichage .= "<br><a href='index.php'><button>Retour Menu</button></a>";
+
+        if ($items === '') {
+            $items = '<li class="text-muted">Aucune commande enregistrée pour le moment.</li>';
+        }
+
+        $this->affichage .= '
+        <div class="mobile-wrap py-4">
+          <main class="mobile-screen px-4 py-4">
+            <div class="fw-bold mb-4">E-BUVETTE</div>
+            <h1 class="h6 fw-semibold mb-3">Historique des ventes</h1>
+
+            <div class="balance-card mb-3 text-center">
+              <div class="text-muted">Ventes du jour</div>
+              <div class="display-6 fw-semibold">200€</div>
+              <div class="history-card mt-3">
+                <div class="fw-semibold mb-2">Historique des achats</div>
+                <ul class="small text-start mb-2 list-unstyled">
+                  ' . $items . '
+                </ul>
+                <div class="text-center small">Afficher plus</div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <a class="btn btn-outline-dark rounded-pill px-4" href="index.php">Retour menu</a>
+            </div>
+          </main>
+        </div>';
     }
 
     public function afficher() {
